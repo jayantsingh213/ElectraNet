@@ -7,7 +7,7 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const path = require('path');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const SERVER_PORT = process.env.PORT || 5000;
 
 // Initialize Gemini
 console.log('🔑 Server Key Check:', process.env.GEMINI_API_KEY ? `Key found: ${process.env.GEMINI_API_KEY.slice(0, 10)}...` : 'No key found!');
@@ -125,6 +125,6 @@ app.get('*splat', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Election Intelligence Server (Gemini Powered) running at http://localhost:${PORT}`);
+app.listen(SERVER_PORT, () => {
+  console.log(`🚀 Election Intelligence Server (Gemini Powered) running at http://localhost:${SERVER_PORT}`);
 });

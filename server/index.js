@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const serverless = require('serverless-http');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -125,6 +126,11 @@ app.get('*splat', (req, res) => {
   });
 });
 
-app.listen(SERVER_PORT, () => {
-  console.log(`🚀 Election Intelligence Server (Gemini Powered) running at http://localhost:${SERVER_PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.NETLIFY) {
+  app.listen(SERVER_PORT, () => {
+    console.log(`🚀 Election Intelligence Server (Gemini Powered) running at http://localhost:${SERVER_PORT}`);
+  });
+}
+
+module.exports = app;
+module.exports.handler = serverless(app);
